@@ -1,0 +1,28 @@
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+      POSTGRES_DB:
+    volumes:
+        - type: bind
+          source: C:\Docker\pgdata\
+          target: /var/lib/postgresql/data
+    restart: on-failure
+    ports:
+      - "5432:5432"
+  bot:
+    build: .
+    environment:
+      DB_HOST:
+      DB_NAME:
+      DB_PASS:
+      DB_USER:
+      TOKEN:
+    restart: always
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
