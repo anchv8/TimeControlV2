@@ -1,3 +1,4 @@
+
 from src.db.engine import get_pool
 
 
@@ -11,7 +12,7 @@ async def create_table_employees():
             full_name VARCHAR(255) NOT NULL,
             mobile_number BIGINT NOT NULL,
             department VARCHAR(255),
-            access_level INT,
+            access_level INT DEFAULT 0,
             PRIMARY KEY (user_tg_id))
             """)
         return data

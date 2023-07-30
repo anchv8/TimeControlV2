@@ -1,10 +1,11 @@
+from aiogram import types, Router
+from aiogram.filters import Command, Text
+from aiogram.fsm.context import FSMContext
+
 from src.db.api.end_work import set_end_work
 from src.db.api.utils import is_end_time_set
 from src.middlewares.is_register import IsRegister
 from src.states import DateTimeStates
-from aiogram.fsm.context import FSMContext
-from aiogram import types, Router
-from aiogram.filters import Command, Text
 
 end_work_router = Router()
 end_work_router.message.middleware(IsRegister())

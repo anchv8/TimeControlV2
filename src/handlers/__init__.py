@@ -1,11 +1,11 @@
 # У каждого хенделра своё название роутера
-from .start import start_router
-from .start_work import start_work_router
-from .end_work import end_work_router
 from .edit_work import edit_work_router
+from .end_work import end_work_router
 from .get_work import get_work_router
 from .get_xlsx import get_xlsx_router
 from .menu_keyboard import menu_router
+from .start import start_router
+from .start_work import start_work_router
 
 # Массив с роутерами для диспетчера
 routers = (start_router, start_work_router,

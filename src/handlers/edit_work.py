@@ -1,11 +1,11 @@
+from aiogram import types, Router
+from aiogram.filters import Command, Text
+from aiogram.fsm.context import FSMContext
+from aiogram3b8_calendar import SimpleCalCallback, SimpleCalendar
+
 from src.db.api.edit_work import set_edit_datetime
 from src.middlewares.is_register import IsRegister
 from src.states import EditStates
-from aiogram.fsm.context import FSMContext
-from aiogram import types, Router
-from aiogram.filters import Command, Text
-
-from aiogram3b8_calendar import SimpleCalCallback, SimpleCalendar
 
 edit_work_router = Router()
 edit_work_router.message.middleware(IsRegister())

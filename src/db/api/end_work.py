@@ -1,7 +1,6 @@
 # Запись времени окончания работы в таблицу work_time
 from datetime import datetime, time
 
-
 from src.db.engine import get_pool
 from src.utils.utils import calculate_duration
 

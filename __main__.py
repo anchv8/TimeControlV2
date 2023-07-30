@@ -1,21 +1,21 @@
-import os
 import asyncio
 import logging
+import os
 from datetime import date, timedelta
 
+from aiogram import Bot
 from aiogram.filters import Command
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
-
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import BotCommand, Message, message
-from aiogram import Bot
-
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from src.db.api.init_tables import run_tables
 from src.db.api.utils import get_user_tg_id, get_unfilled
 from src.dispatcher import get_dispatcher
-from handlers import commands
+from src.handlers import commands
 from src.utils.get_work_keyboard import get_keyboard
-from aiogram import loggers
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
 
 
 async def main() -> None:

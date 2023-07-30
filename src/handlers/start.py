@@ -1,11 +1,11 @@
+from aiogram import types, Router
+from aiogram.filters import Command
+from aiogram.fsm.context import FSMContext
+from aiogram.utils.keyboard import InlineKeyboardBuilder
+
 from src.db.api.start import register
 from src.db.api.utils import is_exist
 from src.states import RegStates
-
-from aiogram.fsm.context import FSMContext
-from aiogram import types, Router
-from aiogram.utils.keyboard import InlineKeyboardBuilder
-from aiogram.filters import Command
 
 start_router = Router(name='start')
 

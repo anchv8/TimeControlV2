@@ -1,13 +1,13 @@
+from aiogram import types, Router
+from aiogram.filters import Command, Text
+from aiogram.fsm.context import FSMContext
+from aiogram.utils.keyboard import InlineKeyboardBuilder
+from aiogram3b8_calendar import SimpleCalCallback, SimpleCalendar
+
 from src.db.api.get_work import get_work_time
 from src.db.api.utils import get_unfilled
 from src.middlewares.is_register import IsRegister
 from src.states import CustomStates
-from aiogram import types, Router
-from aiogram.fsm.context import FSMContext
-from aiogram.filters import Command, Text
-from aiogram.utils.keyboard import InlineKeyboardBuilder
-from aiogram3b8_calendar import SimpleCalCallback, SimpleCalendar
-
 from src.utils.get_work_keyboard import get_keyboard
 from src.utils.utils import calculate_total, get_week_dates, get_month_dates
 

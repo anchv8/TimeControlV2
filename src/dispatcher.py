@@ -5,7 +5,8 @@ from aiogram import Dispatcher
 from aiogram.fsm.storage.base import BaseEventIsolation, BaseStorage
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.fsm.strategy import FSMStrategy
-from handlers import routers
+
+from src.handlers import routers
 from src.utils.get_work_keyboard import kb_router
 
 

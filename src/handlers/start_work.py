@@ -1,11 +1,11 @@
+from aiogram import types, Router
+from aiogram.filters import Command, Text
+from aiogram.fsm.context import FSMContext
+
 from src.db.api.start_work import set_start_work
 from src.db.api.utils import is_start_time_set
 from src.middlewares.is_register import IsRegister
 from src.states import DateTimeStates
-
-from aiogram.fsm.context import FSMContext
-from aiogram import types, Router, F
-from aiogram.filters import Command, Text
 
 start_work_router = Router(name='start_work')
 start_work_router.message.middleware(IsRegister())

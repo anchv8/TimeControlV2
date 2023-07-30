@@ -1,5 +1,5 @@
-from datetime import datetime, time, timedelta
 import datetime as dt
+from datetime import datetime, time, timedelta
 
 
 # Функция для подсчета отработанного времени. Используется в set_end_work и set_edit_datetime

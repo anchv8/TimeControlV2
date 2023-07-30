@@ -1,20 +1,19 @@
+import os
 from datetime import datetime
 
-from aiogram.fsm.context import FSMContext
-from aiogram.types import BufferedInputFile
+import pandas as pd
 from aiogram import types, Router
 from aiogram.filters import Command, Text
+from aiogram.fsm.context import FSMContext
+from aiogram.types import BufferedInputFile
+from aiogram3b8_calendar import SimpleCalCallback, SimpleCalendar
+from openpyxl import Workbook
 from openpyxl.styles import Font, Alignment
 
 from src.db.api.get_xlsx import xlsx_query_all, xlsx_query_dep
 from src.db.api.utils import check_access, get_dep
 from src.middlewares.is_register import IsRegister
 from src.states import XlsxState
-from aiogram3b8_calendar import SimpleCalCallback, SimpleCalendar
-
-import pandas as pd
-from openpyxl import Workbook
-import os
 
 get_xlsx_router = Router()
 get_xlsx_router.message.middleware(IsRegister())
