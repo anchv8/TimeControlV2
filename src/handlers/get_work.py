@@ -18,7 +18,8 @@ get_work_router.message.middleware(IsRegister())
 # Клавиатура с выбором периода выгрузки
 @get_work_router.message(Command('getwork'))
 @get_work_router.message(Text('📄 Мои смены'))
-async def get_data_handler(message: types.Message):
+async def get_data_handler(message: types.Message, state: FSMContext):
+    await state.clear()
     keyboard = InlineKeyboardBuilder()
     keyboard.add(
         types.InlineKeyboardButton(text="Текущий месяц", callback_data="month"),

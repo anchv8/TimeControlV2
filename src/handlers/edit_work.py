@@ -11,10 +11,11 @@ edit_work_router = Router()
 edit_work_router.message.middleware(IsRegister())
 
 
-# Команда редактироваия даты и времени
+# Команда редактирования даты и времени
 @edit_work_router.message(Command('editwork'))
 @edit_work_router.message(Text('✏️ Изменить время'))
 async def edit_work_day(message: types.Message, state: FSMContext):
+    await state.clear()
     await message.answer("Выбери день для редактирования: ",
                          reply_markup=SimpleCalendar().start_calendar())
     await state.set_state(EditStates.DATE)

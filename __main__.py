@@ -3,6 +3,7 @@ import logging
 import os
 from datetime import date, timedelta
 
+from aiogram.exceptions import TelegramBadRequest, TelegramRetryAfter
 from aiogram import Bot
 from aiogram.filters import Command
 from aiogram.fsm.storage.memory import MemoryStorage
@@ -37,12 +38,24 @@ async def main() -> None:
 
         for tg_id in user_tg_id:
             unfilled = await get_unfilled(tg_id[0], str(start_date), str(end_date))
-            await bot.send_message(chat_id=tg_id[0],
-                                   text=f"У тебя есть незакрытые смены за период c {start_date} по {end_date}\n"
-                                        f"Выбери смену из списка ниже и отредактируй время окончания работы",
-                                   reply_markup=get_keyboard(unfilled))
+            if unfilled[0] is not None:
+                try:
+                    await bot.send_message(chat_id=tg_id[0],
+                                           text=f"У тебя есть незакрытые смены за период c {start_date} по {end_date}\n"
+                                                f"Выбери смену из списка ниже и отредактируй время окончания работы",
+                                           reply_markup=get_keyboard(unfilled))
+                except TelegramBadRequest:
+                    logging.error(f"Target [ID:{tg_id[0]}]: invalid user ID")
+                except TelegramRetryAfter as e:
+                    logging.error(
+                        f"Target [ID:{tg_id[0]}]: Flood limit is exceeded. "
+                        f"Sleep {e.retry_after} seconds."
+                        )
+                    await asyncio.sleep(e.retry_after)
+                else:
+                    logging.info(f"Target [ID:{tg_id[0]}]: success")
 
-    scheduler.add_job(auto_check_unfilled, 'cron', day_of_week='mon', hour=13, args=(message,))
+    scheduler.add_job(auto_check_unfilled, 'cron', day_of_week='mon', hour=9, args=(message,))
     scheduler.start()
 
     await dp.start_polling(bot)

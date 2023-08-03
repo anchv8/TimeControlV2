@@ -15,6 +15,7 @@ start_work_router.message.middleware(IsRegister())
 @start_work_router.message(Command('startwork'))
 @start_work_router.message(Text(text='⏳ Начало работы'))
 async def start_work(message: types.Message, state: FSMContext):
+    await state.clear()
     if not await is_start_time_set(message.from_user.id, message.date.strftime("%Y-%m-%d")):
         await message.answer("Введи время начала работы в формате ЧЧ:ММ")
         await state.set_state(DateTimeStates.START_TIME)

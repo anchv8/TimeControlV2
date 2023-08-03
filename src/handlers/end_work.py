@@ -15,6 +15,7 @@ end_work_router.message.middleware(IsRegister())
 @end_work_router.message(Command('endwork'))
 @end_work_router.message(Text('⌛ Конец работы'))
 async def end_work(message: types.Message, state: FSMContext):
+    await state.clear()
     check = await is_end_time_set(message.from_user.id, message.date.strftime("%Y-%m-%d"))
     if check == "ok":
         await message.answer("Введи время окончания работы в формате ЧЧ:ММ")

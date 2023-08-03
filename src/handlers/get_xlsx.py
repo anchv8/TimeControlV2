@@ -32,6 +32,7 @@ async def access(user_id):
 @get_xlsx_router.message(Command('xlsx'))
 @get_xlsx_router.message(Text('🗄️ Табель (для руководителей отделов)'))
 async def excel(message: types.Message, state: FSMContext):
+    await state.clear()
     if await access(message.from_user.id) != 0:
         await message.answer("Выбери начало периода: ",
                              reply_markup=SimpleCalendar().start_calendar())
