@@ -1,3 +1,5 @@
+import logging
+
 from aiogram import types, Router
 from aiogram.filters import Command, Text
 from aiogram.fsm.context import FSMContext
@@ -15,6 +17,7 @@ end_work_router.message.middleware(IsRegister())
 @end_work_router.message(Command('endwork'))
 @end_work_router.message(Text('⌛ Конец работы'))
 async def end_work(message: types.Message, state: FSMContext):
+    logging.info(f"User [id={message.from_user.id}] used command [command={message.text}]")
     await state.clear()
     check = await is_end_time_set(message.from_user.id, message.date.strftime("%Y-%m-%d"))
     if check == "ok":

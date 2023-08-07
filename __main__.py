@@ -27,6 +27,7 @@ async def main() -> None:
         commands_for_bot.append(BotCommand(command=cmd[0], description=cmd[1]))
     bot = Bot(token=os.getenv('TOKEN'))
     dp = get_dispatcher(storage=MemoryStorage())
+
     await bot.set_my_commands(commands=commands_for_bot)
     await run_tables()
 
@@ -50,7 +51,7 @@ async def main() -> None:
                     logging.error(
                         f"Target [ID:{tg_id[0]}]: Flood limit is exceeded. "
                         f"Sleep {e.retry_after} seconds."
-                        )
+                    )
                     await asyncio.sleep(e.retry_after)
                 else:
                     logging.info(f"Target [ID:{tg_id[0]}]: success")

@@ -1,3 +1,5 @@
+import logging
+
 from aiogram import types, Router
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
@@ -13,6 +15,7 @@ start_router = Router(name='start')
 # Обработчики сообщений с регистрацией
 @start_router.message(Command('start'))
 async def start_handler(message: types.Message, state: FSMContext):
+    logging.info(f"User [id={message.from_user.id}] used command [command={message.text}]")
     await state.clear()
     if not await is_exist(message.from_user.id):
         await message.answer("Привет! Нужно тебя зарегистрировать в системе, для этого следуй шагам ниже\n\n"

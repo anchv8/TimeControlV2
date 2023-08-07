@@ -1,3 +1,5 @@
+import logging
+
 from aiogram import types, Router
 from aiogram.filters import Command, Text
 from aiogram.fsm.context import FSMContext
@@ -15,6 +17,7 @@ edit_work_router.message.middleware(IsRegister())
 @edit_work_router.message(Command('editwork'))
 @edit_work_router.message(Text('✏️ Изменить время'))
 async def edit_work_day(message: types.Message, state: FSMContext):
+    logging.info(f"User [id={message.from_user.id}] used command [command={message.text}]")
     await state.clear()
     await message.answer("Выбери день для редактирования: ",
                          reply_markup=SimpleCalendar().start_calendar())

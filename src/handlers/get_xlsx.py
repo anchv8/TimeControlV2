@@ -1,3 +1,4 @@
+import logging
 import os
 from datetime import datetime
 
@@ -32,6 +33,7 @@ async def access(user_id):
 @get_xlsx_router.message(Command('xlsx'))
 @get_xlsx_router.message(Text('🗄️ Табель (для руководителей отделов)'))
 async def excel(message: types.Message, state: FSMContext):
+    logging.info(f"User [id={message.from_user.id}] used command [command={message.text}]")
     await state.clear()
     if await access(message.from_user.id) != 0:
         await message.answer("Выбери начало периода: ",

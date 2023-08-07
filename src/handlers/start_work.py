@@ -1,4 +1,7 @@
-from aiogram import types, Router
+import logging
+
+import asyncpg
+from aiogram import types, Router, exceptions
 from aiogram.filters import Command, Text
 from aiogram.fsm.context import FSMContext
 
@@ -15,6 +18,7 @@ start_work_router.message.middleware(IsRegister())
 @start_work_router.message(Command('startwork'))
 @start_work_router.message(Text(text='⏳ Начало работы'))
 async def start_work(message: types.Message, state: FSMContext):
+    logging.info(f"User [id={message.from_user.id}] used command [command={message.text}]")
     await state.clear()
     if not await is_start_time_set(message.from_user.id, message.date.strftime("%Y-%m-%d")):
         await message.answer("Введи время начала работы в формате ЧЧ:ММ")
@@ -39,5 +43,5 @@ async def process_start_work(message: types.Message, state: FSMContext):
             await state.clear()
         else:
             await message.answer("Некорректно введено время! Попробуй снова")
-    except:
-        await message.answer("Непредвиденная ошибка")
+    except (exceptions, asyncpg.exceptions) as e:
+        await message.answer(f"Непредвиденная ошибка: {e}")

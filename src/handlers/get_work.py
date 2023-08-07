@@ -1,3 +1,5 @@
+import logging
+
 from aiogram import types, Router
 from aiogram.filters import Command, Text
 from aiogram.fsm.context import FSMContext
@@ -19,6 +21,7 @@ get_work_router.message.middleware(IsRegister())
 @get_work_router.message(Command('getwork'))
 @get_work_router.message(Text('📄 Мои смены'))
 async def get_data_handler(message: types.Message, state: FSMContext):
+    logging.info(f"User [id={message.from_user.id}] used command [command={message.text}]")
     await state.clear()
     keyboard = InlineKeyboardBuilder()
     keyboard.add(
