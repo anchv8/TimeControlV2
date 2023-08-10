@@ -25,7 +25,7 @@ async def end_work(message: types.Message, state: FSMContext):
         await state.set_state(DateTimeStates.END_TIME)
     elif check == "no result":
         await message.answer(
-            "Отметка о начале работы за сегодня не найдена! Если нужно закрыть вчерашнюю смену, воспользуйся командой /edit_work")
+            "Отметка о начале работы за сегодня не найдена! Если нужно закрыть вчерашнюю смену, воспользуйся командой /editwork")
     elif check == "err":
         await message.answer("Время окончания работы за сегодня уже записано!")
     else:
